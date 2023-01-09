@@ -12,7 +12,7 @@ const desafio3Service = async (valor: object) => {
 
   const { array, dir, key } = valor;
 
-  const sortArray = (array: Array[], dir: string, key: any) => {
+  const sortArray = (array: Array[], dir: string = "asc", key: any) => {
     const asc = (a: any, b: any) => {
       return a - b;
     };
