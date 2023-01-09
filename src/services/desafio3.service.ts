@@ -10,49 +10,40 @@ const desafio3Service = async (valor: object) => {
    * @returns {Array} ordenado
    */
 
-  const { array } = valor;
+  const { array, dir, key } = valor;
 
-  const sortArray = (valor_parametro: any) => {
-    if (typeof valor_parametro == null || typeof valor_parametro == undefined) {
-      return true;
+  const sortArray = (array: Array[], dir: string, key: any) => {
+    const asc = (a: any, b: any) => {
+      return a - b;
+    };
+
+    const desc = (a: any, b: any) => {
+      return b - a;
+    };
+
+    const ascKey = (a: any, b: any, key: string) => {
+      return a.key - b.key;
+    };
+
+    const descKey = (a: any, b: any, key: string) => {
+      return b.key - a.key;
+    };
+
+    if (dir == "desc") {
+      if (key) {
+        return array.sort(descKey(array[0], array[1], key));
+      }
+      return array.sort(desc(array[0], array[1]));
     }
 
-    if (typeof valor_parametro == "boolean") {
-      if (valor_parametro == false) {
-        return true;
-      }
+    if (key) {
+      return array.sort(ascKey(array[0], array[1], key));
     }
 
-    if (typeof valor_parametro == "string") {
-      if (valor_parametro == " ") {
-        return true;
-      }
-    }
-
-    if (typeof valor_parametro == "number") {
-      if ((valor_parametro = 0)) {
-        return true;
-      }
-    }
-
-    if (typeof valor_parametro === "object") {
-      if (valor_parametro.length == 0) {
-        return true;
-      }
-      if (Object.keys(valor_parametro).length === 0) {
-        return true;
-      }
-      if (valor_parametro.length == 1) {
-        if (valor_parametro[0] == "") {
-          return true;
-        }
-      }
-    }
-
-    return false;
+    return array.sort(asc(array[0], array[1]));
   };
 
-  return isBlank;
+  return sortArray;
 };
 
 export default desafio3Service;
