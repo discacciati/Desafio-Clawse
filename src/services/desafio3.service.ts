@@ -1,4 +1,8 @@
-const desafio3Service = async (valor: object) => {
+const desafio3Service = async ({
+  array: [],
+  dir: string = "asc",
+  key: any,
+}) => {
   /**
    * A função descrita a seguir tem o objetivo ordenar um array de Objetos, Matrizes ou de valores nativos ( Number, Boolean, String).
    * @params {Array} - que será ordenado
@@ -10,9 +14,9 @@ const desafio3Service = async (valor: object) => {
    * @returns {Array} ordenado
    */
 
-  const { array, dir, key } = valor;
+ 
 
-  const sortArray = (array: Array[], dir: string = "asc", key: any) => {
+  const sortArray = (array, dir = "asc", key) => {
     const asc = (a: any, b: any) => {
       return a - b;
     };
@@ -28,19 +32,22 @@ const desafio3Service = async (valor: object) => {
     const descKey = (a: any, b: any, key: string) => {
       return b.key - a.key;
     };
+    
+    const a = array[0];
+    const b = array[1];
 
     if (dir == "desc") {
       if (key) {
-        return array.sort(descKey(array[0], array[1], key));
+        return array.sort(descKey(a, b, key));
       }
-      return array.sort(desc(array[0], array[1]));
+      return array.sort(desc(a, b));
     }
 
     if (key) {
-      return array.sort(ascKey(array[0], array[1], key));
+      return array.sort(ascKey(a, b, key));
     }
 
-    return array.sort(asc(array[0], array[1]));
+    return array.sort(asc(a, b));
   };
 
   return sortArray;
